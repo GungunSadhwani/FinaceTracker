@@ -1,0 +1,12 @@
+<!-- templates/report_form.html -->
+<h2>Generate Report</h2>
+<form method="get" action="{% url 'generate_report' %}">
+    <label for="start_date">Start Date:</label>
+    <input type="date" id="start_date" name="start_date" required>
+
+    <label for="end_date">End Date:</label>
+    <input type="date" id="end_date" name="end_date" required>
+
+    <button type="submit">Generate</button>
+</form>
+<a href="{% url 'home' %}">Back to Home</a>

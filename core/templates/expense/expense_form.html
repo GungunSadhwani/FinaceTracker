@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Add Expense{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Add Expense</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.date.label_tag }}  
+            {{ form.date }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.category.label_tag }}  
+            {{ form.category }}
+        </div>
+
+        <div class="mb-3" id="description-field" style="display:none;">
+            {{ form.description.label_tag }}
+            {{ form.description }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.amount.label_tag }}
+            {{ form.amount }}
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{% url 'expenses_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<script>
+    const categorySelect = document.getElementById("category-select");
+    const descriptionField = document.getElementById("description-field");
+
+    function toggleDescriptionField() {
+        if (categorySelect.value === "Other") {
+            descriptionField.style.display = "block";
+        } else {
+            descriptionField.style.display = "none";
+        }
+    }
+
+    // Run on load + change
+    toggleDescriptionField();
+    categorySelect.addEventListener("change", toggleDescriptionField);
+</script>
+{% endblock %}

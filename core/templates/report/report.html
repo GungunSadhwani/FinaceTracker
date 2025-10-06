@@ -1,0 +1,64 @@
+<h2>Report from {{ start_date }} to {{ end_date }}</h2>
+
+<h3>Income</h3>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Date</th>
+        <th>Service</th>
+        <th>Amount</th>
+    </tr>
+    {% for income in income_list %}
+    <tr>
+        <td>{{ income.date }}</td>
+        <td>{{ income.service }}</td>
+        <td>{{ income.amount }}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td colspan="2"><b>Total Income</b></td>
+        <td><b>{{ total_income }}</b></td>
+    </tr>
+</table>
+
+<h3>Expenses</h3>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Amount</th>
+    </tr>
+    {% for expense in expense_list %}
+    <tr>
+        <td>{{ expense.date }}</td>
+        <td>{{ expense.category }}</td>
+        <td>{{ expense.amount }}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td colspan="2"><b>Total Expense</b></td>
+        <td><b>{{ total_expense }}</b></td>
+    </tr>
+</table>
+
+<h3>Total Revenue: {{ total_revenue }}</h3>
+
+<h3>Income by Service</h3>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Service</th>
+        <th>Count</th>
+    </tr>
+    {% for item in service_summary %}
+    <tr>
+        <td>{{ item.service }}</td>
+        <td>{{ item.count }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{% url 'export_report_pdf' %}?start_date={{ start_date }}&end_date={{ end_date }}">
+    <button>Export as PDF</button>
+</a>
+
+
+<a href="{% url 'home' %}">Back to Home</a>

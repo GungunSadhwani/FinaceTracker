@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="d-flex">
+  <!-- Sidebar -->
+  <div class="bg-dark text-white p-3" style="width: 220px; min-height: 100vh;">
+    <h4 class="text-center">Menu</h4>
+    <hr>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'dashboard' %}">📊 Dashboard</a>
+      </li>
+      <li class="nav-item mt-2">
+        <span class="fw-bold">💰 Income</span>
+        <ul class="nav flex-column ms-3">
+          <li><a class="nav-link text-white" href="{% url 'income_list' %}">View Income</a></li>
+          <li><a class="nav-link text-white" href="{% url 'income_create' %}">Add Income</a></li>
+        </ul>
+      </li>
+      <li class="nav-item mt-2">
+        <span class="fw-bold">💸 Expense</span>
+        <ul class="nav flex-column ms-3">
+          <li><a class="nav-link text-white" href="{% url 'expenses_list' %}">View Expenses</a></li>
+          <li><a class="nav-link text-white" href="{% url 'expense_create' %}">Add Expense</a></li>
+        </ul>
+      </li>
+      <li class="nav-item mt-3">
+        <a class="nav-link text-white" href="/admin/">⚙️ Admin Panel</a>
+      </li>
+      <li class="nav-item mt-3">
+        <a href="{% url 'report_form' %}">
+    <button>Generate Report</button>
+</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main content -->
+  <div class="flex-grow-1 p-4">
+    <h2>Welcome to the Finance Tracker</h2>
+    <p class="text-muted">Use the menu on the left to manage incomes and expenses.</p>
+  </div>
+</div>
+{% endblock %}

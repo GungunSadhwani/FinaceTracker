@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light p-4">
+    <div class="container">
+        <h1 class="mb-4">Clinic Dashboard</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-bg-success mb-3 shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Income</h5>
+                        <p class="card-text fs-4">Rs. {{ total_income }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-bg-danger mb-3 shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Expenses</h5>
+                        <p class="card-text fs-4">Rs. {{ total_expenses }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-bg-primary mb-3 shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Net Balance</h5>
+                        <p class="card-text fs-4">Rs. {{ net_balance }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <a href="{% url 'home' %}" class="btn btn-outline-primary">Home</a>
+        <a href="{% url 'income_list' %}" class="btn btn-outline-success">View Incomes</a>
+        <a href="{% url 'expenses_list' %}" class="btn btn-outline-danger">View Expenses</a>
+        <a href="{% url 'report_form' %}" class="btn btn-info">Generate Report</a>
+
+    </div>
+</body>
+</html>
