@@ -1,38 +1,101 @@
 {% extends "base.html" %}
-{% block title %}Add Expense{% endblock %}
+{% block title %}Expenses{% endblock %}
 
 {% block content %}
-<h2>Expenses</h2>
-<a href="{% url 'expense_create' %}" class="btn btn-success mb-3">+ Add Expense</a>
+<style>
+    .page-header {
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 30px;
+    }
 
-<table class="table table-striped">
-  <thead class="table-dark">
-    <tr>
-      <th>Date</th>
-      <th>Category</th>
-      <th>Description</th>
-      <th>Amount (Rs)</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for expense in expenses %}
-    <tr>
-      <td>{{ expense.date|date:"M. j, Y" }}</td>
-      <td>{{ expense.category }}</td>
-      <td>{{ expense.description|default:"-" }}</td>
-      <td>{{ expense.amount }}</td>
-      <td>
-        <a href="{% url 'expense_delete' expense.id %}" class="btn btn-danger btn-sm">
-          Delete
-        </a>
-      </td>
-    </tr>
-    {% empty %}
-    <tr>
-      <td colspan="5" class="text-center">No expenses found.</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    .page-header h2 {
+        font-weight: 700;
+        color: #508be3; /* Hospital blue */
+        letter-spacing: 0.5px;
+    }
+
+    .btn-primary {
+        background-color: #508be3;
+        border: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #508be3;
+        transform: scale(1.05);
+    }
+
+    .table-container {
+        max-width: 950px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 6px 20px rgba(13, 110, 253, 0.1);
+    }
+
+    table th {
+        background-color: #508be3 !important;
+        color: white !important;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .btn-danger {
+        transition: all 0.3s ease;
+    }
+
+    .btn-danger:hover {
+        transform: scale(1.05);
+    }
+
+    body {
+        background: linear-gradient(135deg, #f8faff, #e3f2fd);
+    }
+</style>
+
+<div class="page-header">
+    <h2>Expense Records</h2>
+    <a href="{% url 'expense_create' %}" class="btn btn-primary mt-3">+ Add New Expense</a>
+</div>
+
+<div class="table-container">
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Amount (Rs)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.date|date:"M. j, Y" }}</td>
+                <td>{{ expense.category }}</td>
+                <td>{{ expense.description|default:"-" }}</td>
+                <td><strong>{{ expense.amount }}</strong></td>
+                <td>
+                    <a href="{% url 'expense_delete' expense.id %}" class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center text-muted">No expenses found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

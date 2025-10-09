@@ -2,38 +2,120 @@
 {% block title %}Add Expense{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>Add Expense</h2>
+<style>
+    .expense-form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 90vh;
+        background: linear-gradient(135deg, #f0f7ff, #e3f2fd);
+    }
 
-    <form method="post">
-        {% csrf_token %}
-        <div class="mb-3">
-            {{ form.date.label_tag }}  
-            {{ form.date }}
-        </div>
+    .expense-form-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(13, 110, 253, 0.15);
+        padding: 40px;
+        width: 100%;
+        max-width: 480px;
+        transition: all 0.3s ease-in-out;
+    }
 
-        <div class="mb-3">
-            {{ form.category.label_tag }}  
-            {{ form.category }}
-        </div>
+    .expense-form-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(13, 110, 253, 0.25);
+    }
 
-        <div class="mb-3" id="description-field" style="display:none;">
-            {{ form.description.label_tag }}
-            {{ form.description }}
-        </div>
+    .expense-form-card h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #508be3;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
 
-        <div class="mb-3">
-            {{ form.amount.label_tag }}
-            {{ form.amount }}
-        </div>
+    label {
+        font-weight: 600;
+        color: #495057;
+    }
 
-        <button type="submit" class="btn btn-success">Save</button>
-        <a href="{% url 'expenses_list' %}" class="btn btn-secondary">Cancel</a>
-    </form>
+    input, select, textarea {
+        width: 100%;
+        border-radius: 8px !important;
+        border: 1px solid #ced4da;
+        padding: 10px;
+        transition: border-color 0.3s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        border-color: #508be3;
+        box-shadow: 0 0 5px rgba(13, 110, 253, 0.3);
+        outline: none;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        padding: 10px;
+        background-color: #508be3;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #508be3;
+        transform: scale(1.03);
+    }
+
+    .btn-secondary {
+        width: 100%;
+        margin-top: 10px;
+        padding: 10px;
+        font-weight: 600;
+    }
+
+    @media (max-width: 576px) {
+        .expense-form-card {
+            padding: 25px;
+        }
+    }
+</style>
+
+<div class="expense-form-container">
+    <div class="expense-form-card">
+        <h2>Add Expense</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                {{ form.date.label_tag }}
+                {{ form.date }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.category.label_tag }}
+                {{ form.category }}
+            </div>
+
+            <div class="mb-3" id="description-field" style="display:none;">
+                {{ form.description.label_tag }}
+                {{ form.description }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.amount.label_tag }}
+                {{ form.amount }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">💾 Save Expense</button>
+            <a href="{% url 'expenses_list' %}" class="btn btn-secondary">← Cancel</a>
+        </form>
+    </div>
 </div>
 
 <script>
-    const categorySelect = document.getElementById("category-select");
+    const categorySelect = document.getElementById("category-select") || document.querySelector("select[name='category']");
     const descriptionField = document.getElementById("description-field");
 
     function toggleDescriptionField() {
@@ -44,7 +126,6 @@
         }
     }
 
-    // Run on load + change
     toggleDescriptionField();
     categorySelect.addEventListener("change", toggleDescriptionField);
 </script>

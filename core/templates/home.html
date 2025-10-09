@@ -2,44 +2,126 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="d-flex">
+<style>
+  /* Layout Wrapper */
+  .main-layout {
+    display: flex;
+    min-height: 85vh;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    background-color: #ffffff;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    background-color: #508be3;
+    color: #ffffff;
+    width: 230px;
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar h4 {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .sidebar hr {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .sidebar .nav-link {
+    color: #e9f1ff;
+    font-weight: 500;
+    transition: all 0.3s;
+    border-radius: 6px;
+    padding: 8px 12px;
+  }
+
+  .sidebar .nav-link:hover {
+    background-color: #4c84dd;
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .sidebar .fw-bold {
+    color: #ffffff;
+    opacity: 0.9;
+  }
+
+  .sidebar button {
+    background-color: #ffffff;
+    color: #4c84dd;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: 0.3s;
+  }
+
+  .sidebar button:hover {
+    background-color: #f0f4fb;
+  }
+
+  /* Main Content */
+  .main-content {
+    flex-grow: 1;
+    padding: 40px;
+    background-color: #f7f9fc;
+  }
+
+  .main-content h2 {
+    color: #4c84dd;
+    font-weight: 700;
+  }
+
+  .main-content p {
+    color: #6c757d;
+  }
+</style>
+
+<div class="main-layout">
   <!-- Sidebar -->
-  <div class="bg-dark text-white p-3" style="width: 220px; min-height: 100vh;">
-    <h4 class="text-center">Menu</h4>
+  <div class="sidebar">
+    <h4>Menu</h4>
     <hr>
     <ul class="nav flex-column">
-      <li class="nav-item">
-        <a class="nav-link text-white" href="{% url 'dashboard' %}">📊 Dashboard</a>
+      <li class="nav-item mb-2">
+        <a class="nav-link" href="{% url 'dashboard' %}">📊 Dashboard</a>
       </li>
       <li class="nav-item mt-2">
         <span class="fw-bold">💰 Income</span>
-        <ul class="nav flex-column ms-3">
-          <li><a class="nav-link text-white" href="{% url 'income_list' %}">View Income</a></li>
-          <li><a class="nav-link text-white" href="{% url 'income_create' %}">Add Income</a></li>
+        <ul class="nav flex-column ms-3 mt-1">
+          <li><a class="nav-link" href="{% url 'income_list' %}">View Income</a></li>
+          <li><a class="nav-link" href="{% url 'income_create' %}">Add Income</a></li>
         </ul>
       </li>
       <li class="nav-item mt-2">
         <span class="fw-bold">💸 Expense</span>
-        <ul class="nav flex-column ms-3">
-          <li><a class="nav-link text-white" href="{% url 'expenses_list' %}">View Expenses</a></li>
-          <li><a class="nav-link text-white" href="{% url 'expense_create' %}">Add Expense</a></li>
+        <ul class="nav flex-column ms-3 mt-1">
+          <li><a class="nav-link" href="{% url 'expenses_list' %}">View Expenses</a></li>
+          <li><a class="nav-link" href="{% url 'expense_create' %}">Add Expense</a></li>
         </ul>
       </li>
       <li class="nav-item mt-3">
-        <a class="nav-link text-white" href="/admin/">⚙️ Admin Panel</a>
+        <a class="nav-link" href="/admin/">⚙️ Admin Panel</a>
       </li>
       <li class="nav-item mt-3">
         <a href="{% url 'report_form' %}">
-    <button>Generate Report</button>
-</a>
+          <button>📄 Generate Report</button>
+        </a>
       </li>
     </ul>
   </div>
 
   <!-- Main content -->
-  <div class="flex-grow-1 p-4">
+  <div class="main-content">
     <h2>Welcome to the Finance Tracker</h2>
-    <p class="text-muted">Use the menu on the left to manage incomes and expenses.</p>
+    <p class="text-muted">Use the menu on the left to manage your hospital’s incomes and expenses efficiently.</p>
   </div>
 </div>
 {% endblock %}

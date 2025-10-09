@@ -1,8 +1,62 @@
 {% extends "base.html" %}
+{% block title %}All Incomes{% endblock %}
+
 {% block content %}
-<div class="container mt-4">
+<style>
+  .income-container {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-top: 5px solid #508be3;
+    margin: 50px auto;
+    max-width: 1000px;
+  }
+  .income-container h2 {
+    color: #508be3;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .btn-primary {
+    background-color: #508be3;
+    border: none;
+    transition: 0.3s;
+  }
+  .btn-primary:hover {
+    background-color: #3b75d4;
+  }
+  .table {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .table thead {
+    background-color: #508be3;
+    color: white;
+  }
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
+  }
+  .badge {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+    border-radius: 8px;
+  }
+  .btn-danger {
+    background-color: #dc3545;
+    border: none;
+    transition: 0.3s;
+  }
+  .btn-danger:hover {
+    background-color: #b02a37;
+  }
+</style>
+
+<div class="income-container">
   <h2>All Incomes</h2>
-  <a href="{% url 'income_create' %}" class="btn btn-primary mb-3">Add New Income</a>
+  <div class="text-end mb-3">
+    <a href="{% url 'income_create' %}" class="btn btn-primary">+ Add New Income</a>
+  </div>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -18,7 +72,7 @@
       <tr>
         <td>{{ i.date }}</td>
         <td>{{ i.service }}</td>
-        <td>{{ i.amount }}</td>
+        <td>Rs {{ i.amount }}</td>
         <td>
           {% if i.payment_status == "Paid" %}
             <span class="badge bg-success">{{ i.payment_status }}</span>
@@ -37,7 +91,7 @@
       </tr>
       {% empty %}
       <tr>
-        <td colspan="5" class="text-center">No income records yet.</td>
+        <td colspan="5" class="text-center text-muted">No income records yet.</td>
       </tr>
       {% endfor %}
     </tbody>
